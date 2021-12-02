@@ -15,7 +15,7 @@ library(dplyr)
 
 # Create a character vector of the names of the csv files we want to load
 # (represented as 6 digits followed by -divvy-tripdata.csv)
-files <- list.files(pattern = "\\d{6}-divvy-tripdata.csv")
+files <- list.files(pattern = "[0-9]{6}-divvy-tripdata.csv")
 
 # Read the csv files into a list
 cyclistic <- purrr::map(files, read_csv)
@@ -35,11 +35,11 @@ purrr::map_lgl(1:11, function(i)
 
 # Look at the data types of the "start_station_id" column
 purrr::map_chr(1:12, function(i) 
-  full_list %>% purrr::pluck(i, "start_station_id") %>% class)
+  cyclistic %>% purrr::pluck(i, "start_station_id") %>% class)
 
 # Look at the data types of the "end_station_id" column
 purrr::map_chr(1:12, function(i) 
-  full_list %>% purrr::pluck(i, "end_station_id") %>% class)
+  cyclistic %>% purrr::pluck(i, "end_station_id") %>% class)
 ## From December 2020, the start and end_station_id had some listings that included
 ## letters.
 
